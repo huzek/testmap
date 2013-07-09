@@ -17,7 +17,7 @@
 
 <script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js" type="text/javascript"></script>
-
+<script src="js/imageflip.mini.js"></script>
 
 
     <script type="text/javascript">
@@ -37,6 +37,15 @@
         });
 
     </script>
+    
+    
+    
+    <script type="text/javascript">
+$( document ).delegate("#Photos", "pageinit", function() {
+	$('#iGallery').imageflip()
+})
+</script>
+
 </head> 
 <body> 
 
@@ -130,16 +139,20 @@
         </div>
         <!-- /header -->
 
-        <div data-role="content" data-theme="c">
-            <p1>Photos</p1>
-            <div class="thumbs" data-gallery="one">
-                <a href="Images/pic/01.jpg" style="background-image: url(Images/pic/01.jpg)" title="Lion Rock"></a>
-                <a href="Images/pic/02.jpg" style="background-image: url(Images/pic/02.jpg)" title="Holsten Gate"></a>
-                <a href="Images/pic/03.jpg" style="background-image: url(Images/pic/03.jpg)" title="Blue Hour"></a>
-                <a href="Images/pic/04.jpg" style="background-image: url(Images/pic/04.jpg)" title="Waikato Landscape"></a>
-            </div>
-
-        </div>
+  	<div data-role="content" id="content">
+		<div class="content-primary">	
+		<ul id="iGallery">
+			
+			<li><a href="images/252_01.jpg"><img src="images/252.jpg" /></a></li>
+			<li><a href="images/253_01.jpg"><img src="images/253.jpg" /></a></li>
+			<li><a href="images/254_01.jpg"><img src="images/254.jpg" /></a></li>
+			<li><a href="images/255_01.jpg"><img src="images/255.jpg" /></a></li>
+			<li><a href="images/257_01.jpg"><img src="images/257.jpg" /></a></li>
+			<li><a href="images/260_01.jpg"><img src="images/260.jpg" /></a></li>
+			<li><a href="images/261_01.jpg"><img src="images/261.jpg" /></a></li>
+		</ul>
+		</div>
+	</div>
         <!-- /content -->
         <div data-role="footer" data-id="myfooter" data-position="fixed" data-tap-toggle="false">
             <div data-role="navbar" class="nav-glyphish-example">
