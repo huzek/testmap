@@ -22,7 +22,7 @@ $(function () {
 var map;
 
 function createQuakeEventMarker(quakeEventLatlng) {
-    return new google.maps.Marker({ position: quakeEventLatlng, map: map });
+    return new google.maps.Marker({ position: quakeEventLatlng, map: map ,title: 'Buy2best.com' ,icon:'glyphish-icons/map-marker.png'  });
 }
 
 function setupMap(lat, lng, mapZoom, showOverviewControl) {
