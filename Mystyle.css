@@ -6,7 +6,7 @@
     .Videos1 .ui-icon { background:  url(glyphish-icons/46-movie-2.png) 50% 50% no-repeat;  background-size: 20px 24px; }
     .Location1 .ui-icon { background:  url(glyphish-icons/07-map-marker.png) 50% 50% no-repeat;  background-size: 20px 24px; }
     .Contact1 .ui-icon { background:  url(glyphish-icons/18-envelope.png) 50% 50% no-repeat;  background-size: 24px 18px; }
-
+ 
      .login1 .ui-icon { background:  url(glyphish-icons/30-key.png) 50% 50% no-repeat;  background-size: 12px 26px; }
  
 
@@ -29,3 +29,21 @@
     padding: 0;
     text-shadow: none;
 }
+
+
+
+
+#contact_buttons a{
+color:rgb(63, 41, 39);
+}
+
+
+#contact_buttons  .ui-btn-corner-al
+.ui-icon-tel{
+background: rgb(63, 41, 39) url(images/phone.png) no-repeat;
+}
+.ui-icon-maps {
+background: rgb(63, 41, 39) url(images/maps.png) no-repeat;
+}
+
+

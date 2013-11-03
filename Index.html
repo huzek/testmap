@@ -6,273 +6,392 @@
     <link href="jquery-mobile/jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css" />
     <link href="jquery-mobile/jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Mystyle.css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
     <script type="text/javascript" src="MyScript.js"></script>
 
+    <link href="jquery-mobile/jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css" />
+    <link href="jquery-mobile/jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="lib/jquery-mobile.css" type="text/css" rel="stylesheet" />
+    <link href="lib/photoswipe.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="lib/klass.min.js"></script>
 
     <script src="jquery-mobile/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/jquery.mobile-1.0.min.js" type="text/javascript"></script>
 
-    <script src="js/imageflip.mini.js"></script>
 
-    <style type="text/css">
-        #iGallery
-        {
-            list-style: none;
-            padding: 0px;
-            margin: 0px;
-        }
+    <script type="text/javascript" src="lib/code.photoswipe.jquery-3.0.5.min.js"></script>
 
-            #iGallery li
-            {
-                list-style: none;
-                padding: 2px;
-                margin: 2px;
-                border: 1px solid #999;
-                float: left;
-            }
 
-        /* imageflip CSS. Copy & Paste this to your CSS file */
-        #imageflippage
-        {
-            background-color: #000;
-            margin: 0px;
-            padding: 0px;
-            border: none;
-            height: 100%;
-            width: 100%;
-        }
-
-        #tadcontent
-        {
-            padding: 0px;
-            margin: 0px;
-            position: relative;
-            background: #000;
-            height: 100%;
-            width: 100%;
-        }
-
-        #imageflipimg
-        {
-            vertical-align: middle;
-            height: 100%;
-            width: 100%;
-            z-index: 98;
-            background-position: center;
-            background-size: contain;
-            text-align: center;
-            background-repeat: no-repeat;
-        }
-
-        #imagefliper
-        {
-            width: 100%;
-            top: 45px;
-            bottom: 0px;
-            position: absolute;
-            z-index: 99;
-        }
-
-        #tadnavi
-        {
-            position: fixed;
-            top: 0px;
-            z-index: 100;
-            width: 100%;
-            opacity: 0.7;
-            display: none;
-        }
-
-        #tadinfo
-        {
-            position: fixed;
-            display: none;
-            bottom: 0px;
-            width: 100%;
-            padding: 5px;
-            background-color: #333333;
-            opacity: 0.7;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: small;
-            font-family: Verdana, Geneva, sans-serif;
-        }
-    </style>
     <script type="text/javascript">
-        $(document).delegate("#Photos", "pageinit", function () {
-            $('#iGallery').imageflip()
-        })
+
+        /*
+		 * IMPORTANT!!!
+		 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
+		 * If you don't this will mess with how jQuery Mobile works
+		 */
+
+        (function (window, $, PhotoSwipe) {
+
+            $(document).ready(function () {
+
+                $('div.gallery-page')
+					.live('pageshow', function (e) {
+
+					    var
+							currentPage = $(e.target),
+							options = {},
+							photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options, currentPage.attr('id'));
+
+					    return true;
+
+					})
+
+					.live('pagehide', function (e) {
+
+					    var
+							currentPage = $(e.target),
+							photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+
+					    if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+					        PhotoSwipe.detatch(photoSwipeInstance);
+					    }
+
+					    return true;
+
+					});
+
+            });
+
+        }(window, window.jQuery, window.Code.PhotoSwipe));
+
     </script>
 
 </head>
 <body>
 
+
     <!-- PAGE -->
-    <div data-role="page" id="page">
-        <div data-role="header" data-position="fixed">
-            <h3>Buy2best.com</h3>
-            <a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+    <div data-role="page" id="Home">
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <h1>Buy2best.com</h1>
         </div>
+        
         <div data-role="content">
-            <ul data-role="listview">
-                <li><a href="#Photos">Products</a></li>
-                <li><a href="#Videos">Website</a></li>
-                <li><a href="#details">Map</a></li>
+ 			<div align="center"> <img height="100%"; width="100%" src="images/header.jpg"; /> </div>
+            <p>Products</p>
+
+            <ul data-role="listview" data-inset="true">
+                <li><a href="#Gallery1">Personal Items</a></li>
+                <li><a href="#Gallery2">Home Accessories</a></li>
+                <li><a href="#Gallery3">Car Accessories</a></li>
+                <li><a href="#Gallery4">Mobile & Laptop Accessories</a></li>
+                <li><a href="#Gallery5">Stationery</a></li>
+                
+
             </ul>
         </div>
+
         <div data-role="footer" data-position="fixed" data-id="myfooter">
             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
                 <ul>
-                    <li><a href="#About" class="About1" data-icon="custom">About</a></li>
-                    <li><a href="#Photos" class="Photos1" data-icon="custom">Products</a></li>
-                    <li><a href="#Videos" class="Videos1" data-icon="custom">Website</a></li>
-                    <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
-                    <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>
+                  <li><a href="#Home" class="Photos1" data-icon="custom">Home</a></li>
+                   <li><a href="#About" class="About1" data-icon="custom">About</a></li>
+                   <li><a href="http://buy2best.com"class="Videos1" target="_self" data-icon="custom">Webstie</a></li>
+                   <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
+                   <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>
                 </ul>
             </div>
         </div>
-    </div>
 
-    <!-- PAGE -->
-    <div data-role="page" id="About">
+    </div>
+    
+   
+    
+    <!-- PAGE About -->
+    <div data-role="page" data-add-back-btn="true" id="About"  >
+
         <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
-            <a href="#page" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
             <h1>About</h1>
         </div>
-        <div data-role="content">Content</div>
+
+        <div data-role="content">
+			<p> About </p>
+
+        </div>
         <div data-role="footer" data-position="fixed" data-id="myfooter">
             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
                 <ul>
-                     <li><a href="#About" class="About1" data-icon="custom">About</a></li>
-                    <li><a href="#Photos" class="Photos1" data-icon="custom">Products</a></li>
-                    <li><a href="#Videos" class="Videos1" data-icon="custom">Website</a></li>
-                    <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
-                    <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>               </ul>
-            </div>
-        </div>
-    </div>
-
-    <div data-role="page" id="Photos">
-        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
-            <a href="#page" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
-            <h1>Photos</h1>
-        </div>
-        <div data-role="content">
-            <div class="content-primary">
-                <ul id="iGallery">
-                    <li><a href="images/060_1.jpg">
-                        <img src="images/060.jpg" /></a></li>
-                    <li><a href="images/066_01.jpg">
-                        <img src="images/066.jpg" /></a></li>
-                      <li><a href="images/155_01.jpg">
-                        <img src="images/155.jpg" /></a></li>
-                    <li><a href="images/071_.jpg">
-                        <img src="images/071.jpg" /></a></li>
-                    <li><a href="images/073_01.jpg">
-                        <img src="images/073.jpg" /></a></li>
+                  <li><a href="#Home" class="Photos1" data-icon="custom">Home</a></li>
+                   <li><a href="#About" class="About1" data-icon="custom">About</a></li>
+                   <li><a href="http://buy2best.com"class="Videos1" target="_self" data-icon="custom">Webstie</a></li>
+                   <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
+                   <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>
                 </ul>
             </div>
         </div>
-        <div data-role="footer" data-position="fixed" data-id="myfooter">
-            <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
-                <ul>
-                    <li><a href="#About" class="About1" data-icon="custom">About</a></li>
-                    <li><a href="#Photos" class="Photos1" data-icon="custom">Products</a></li>
-                    <li><a href="#Videos" class="Videos1" data-icon="custom">Website</a></li>
-                    <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
-                    <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>                </ul>
-            </div>
-        </div>
-    </div>
+    </div> 
+    
+    
+   
 
+    <!-- PAGE Location -->
+    <div data-role="page" data-add-back-btn="true" id="details"  >
 
-    <!-- PAGE -->
-    <div data-role="page" id="Videos">
-        <div data-role="header" data-position="fixed">
-            <a href="#page" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
-            <h1>Videos</h1>
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Location</h1>
         </div>
+
         <div data-role="content">
-            <div align="center">
-                <video width="98%" height="200px" controls>
-                    <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
-                    <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
-                    <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
+          <div align="center"> <img height="100%"; width="100%" src="images/map.jpg"; /> </div>
+			<a href="https://maps.google.com/maps?q=Buy2best+&hl=en&ll=29.341332,48.006091&spn=0.019229,0.031028&sll=29.350702,47.993428&sspn=0.051546,0.090895&gl=KW&hq=Buy2best&t=m&z=15&iwloc=A" data-role="button" data-icon="maps"> Find us on Google Maps </a> 	
+	  </div>
         <div data-role="footer" data-position="fixed" data-id="myfooter">
             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
                 <ul>
-                    <li><a href="#About" class="About1" data-icon="custom">About</a></li>
-                    <li><a href="#Photos" class="Photos1" data-icon="custom">Products</a></li>
-                    <li><a href="#Videos" class="Videos1" data-icon="custom">Website</a></li>
-                    <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
-                    <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>               </ul>
+                  <li><a href="#Home" class="Photos1" data-icon="custom">Home</a></li>
+                   <li><a href="#About" class="About1" data-icon="custom">About</a></li>
+                   <li><a href="http://buy2best.com"class="Videos1" target="_self" data-icon="custom">Webstie</a></li>
+                   <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
+                   <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>
+                </ul>
             </div>
         </div>
-    </div>
+    </div> 
+    
 
+    <!-- PAGE Contact -->
+    <div data-role="page" data-add-back-btn="true" id="Contact"  >
 
-    <!-- PAGE -->
-    <div data-role="page" id="details" class="details-page">
-        <div data-role="header" data-position="fixed">
-            <a href="#page" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
-            <h1>Map</h1>
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Contact</h1>
         </div>
-        <script type="text/javascript">
-            function initialize() {
-                setupMap(29.33852576354393, 48.00433695316315, 14, true);
-                var quakeEventLatlng = new google.maps.LatLng(29.33852576354393, 48.00433695316315);
-                var marker = createQuakeEventMarker(quakeEventLatlng)
-                marker.setAnimation(google.maps.Animation.DROP)
-            }
 
-            // Initialize the map when the jQuery Mobile pageshow event is triggered
-            $('.details-page').live("pageshow", function () {
-                if (map == null) {
-                    initialize();
-                }
-            });
+        <div data-role="content">
+     		  <div align="center"> <img height="100%"; width="100%" src="images/address.jpg"; /> </div>
+	<div id="contact_buttons">	
+    
+		<a href="tel:+96522652303"  data-role="button" data-icon="tel"> Call us :22652303</a>	
+		<a href="tel:+96566114578"  data-role="button" data-icon="tel"> Call us :66114578</a>	
+ 		<a href="mailto:Buy2best@hotmail.com"  data-role="button" data-icon="Contact" > Email : Buy2best@hotmail.com</a>
 
-        </script>
-        <div data-role="content" id="map_content" data-theme="a">
-            <div id="map_content">
-                <div id="map_canvas"></div>
-            </div>
+	</div>		 
         </div>
         <div data-role="footer" data-position="fixed" data-id="myfooter">
             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+            
                 <ul>
-                      <li><a href="#About" class="About1" data-icon="custom">About</a></li>
-                    <li><a href="#Photos" class="Photos1" data-icon="custom">Products</a></li>
-                    <li><a href="#Videos" class="Videos1" data-icon="custom">Website</a></li>
-                    <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
-                    <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>              </ul>
+                  <li><a href="#Home" class="Photos1" data-icon="custom">Home</a></li>
+                   <li><a href="#About" class="About1" data-icon="custom">About</a></li>
+                   <li><a href="http://buy2best.com"class="Videos1" target="_self" data-icon="custom">Webstie</a></li>
+                   <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
+                   <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>
+                </ul>
             </div>
         </div>
-    </div>
+    </div> 
+    
 
-    <!-- PAGE -->
-    <div data-role="page" id="Contact">
-        <div data-role="header">
-            <h1>Header</h1>
+
+    <!-- PAGE Gallery1 -->
+    <div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
+
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Personal Items</h1>
         </div>
-        <div data-role="content">Content</div>
-        <div data-role="footer" data-position="fixed" data-id="myfooter">
-            <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
-                <ul>
-                       <li><a href="#About" class="About1" data-icon="custom">About</a></li>
-                    <li><a href="#Photos" class="Photos1" data-icon="custom">Products</a></li>
-                    <li><a href="#Videos" class="Videos1" data-icon="custom">Website</a></li>
-                    <li><a href="#details" class="Location1" data-icon="custom">Location</a></li>
-                    <li><a href="#Contact" class="Contact1" data-icon="custom">Contact</a></li>             </ul>
-            </div>
+
+        <div data-role="content">
+
+            <ul class="gallery">
+
+                <li><a href="images/01/01_.jpg" rel="external"><img src="images/01/01.jpg" alt="Image 01" /></a></li>
+                <li><a href="images/01/02_.jpg" rel="external"><img src="images/01/02.jpg" alt="Image 02" /></a></li>
+                <li><a href="images/01/03_.jpg" rel="external"><img src="images/01/03.jpg" alt="Image 03" /></a></li>
+                <li><a href="images/01/04_.jpg" rel="external"><img src="images/01/04.jpg" alt="Image 04" /></a></li>
+                <li><a href="images/01/05_.jpg" rel="external"><img src="images/01/05.jpg" alt="Image 05" /></a></li>
+                <li><a href="images/01/06_.jpg" rel="external"><img src="images/01/06.jpg" alt="Image 06" /></a></li>
+                <li><a href="images/01/07_.jpg" rel="external"><img src="images/01/07.jpg" alt="Image 07" /></a></li>
+                <li><a href="images/01/08_.jpg" rel="external"><img src="images/01/08.jpg" alt="Image 08" /></a></li>
+                <li><a href="images/01/09_.jpg" rel="external"><img src="images/01/09.jpg" alt="Image 09" /></a></li>
+                <li><a href="images/01/10_.jpg" rel="external"><img src="images/01/10.jpg" alt="Image 10" /></a></li>
+                <li><a href="images/01/11_.jpg" rel="external"><img src="images/01/11.jpg" alt="Image 11" /></a></li>
+                <li><a href="images/01/12_.jpg" rel="external"><img src="images/01/12.jpg" alt="Image 12" /></a></li>
+                <li><a href="images/01/13_.jpg" rel="external"><img src="images/01/13.jpg" alt="Image 13" /></a></li>
+                <li><a href="images/01/14_.jpg" rel="external"><img src="images/01/14.jpg" alt="Image 14" /></a></li>
+                <li><a href="images/01/15_.jpg" rel="external"><img src="images/01/15.jpg" alt="Image 15" /></a></li>
+                <li><a href="images/01/16_.jpg" rel="external"><img src="images/01/16.jpg" alt="Image 16" /></a></li>
+                <li><a href="images/01/17_.jpg" rel="external"><img src="images/01/17.jpg" alt="Image 17" /></a></li>
+                <li><a href="images/01/18_.jpg" rel="external"><img src="images/01/18.jpg" alt="Image 18" /></a></li>
+                <li><a href="images/01/19_.jpg" rel="external"><img src="images/01/19.jpg" alt="Image 19" /></a></li>
+                <li><a href="images/01/20_.jpg" rel="external"><img src="images/01/20.jpg" alt="Image 20" /></a></li>
+            </ul>
+
         </div>
+	<div data-role="footer">
+		<h4>&copy; 2013 Buy2best.com</h4>
+	</div>
+
     </div>
+    
+    
+<!-- PAGE Gallery2 -->
+    <div data-role="page" data-add-back-btn="true" id="Gallery2" class="gallery-page">
+
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Home Accessories</h1>
+        </div>
+
+        <div data-role="content">
+
+            <ul class="gallery">
+
+                <li><a href="images/02/01_.jpg" rel="external"><img src="images/02/01.jpg" alt="Image 101" /></a></li>
+                <li><a href="images/02/02_.jpg" rel="external"><img src="images/02/02.jpg" alt="Image 102" /></a></li>
+                <li><a href="images/02/03_.jpg" rel="external"><img src="images/02/03.jpg" alt="Image 103" /></a></li>
+                <li><a href="images/02/04_.jpg" rel="external"><img src="images/02/04.jpg" alt="Image 104" /></a></li>
+                <li><a href="images/02/05_.jpg" rel="external"><img src="images/02/05.jpg" alt="Image 105" /></a></li>
+                <li><a href="images/02/06_.jpg" rel="external"><img src="images/02/06.jpg" alt="Image 106" /></a></li>
+                <li><a href="images/02/07_.jpg" rel="external"><img src="images/02/07.jpg" alt="Image 107" /></a></li>
+                <li><a href="images/02/08_.jpg" rel="external"><img src="images/02/08.jpg" alt="Image 108" /></a></li>
+                <li><a href="images/02/09_.jpg" rel="external"><img src="images/02/09.jpg" alt="Image 109" /></a></li>
+                <li><a href="images/02/10_.jpg" rel="external"><img src="images/02/10.jpg" alt="Image 110" /></a></li>
+                <li><a href="images/02/11_.jpg" rel="external"><img src="images/02/11.jpg" alt="Image 111" /></a></li>
+                <li><a href="images/02/12_.jpg" rel="external"><img src="images/02/12.jpg" alt="Image 112" /></a></li>
+                <li><a href="images/02/13_.jpg" rel="external"><img src="images/02/13.jpg" alt="Image 113" /></a></li>
+                <li><a href="images/02/14_.jpg" rel="external"><img src="images/02/14.jpg" alt="Image 114" /></a></li>
+                <li><a href="images/02/15_.jpg" rel="external"><img src="images/02/15.jpg" alt="Image 115" /></a></li>
+                <li><a href="images/02/16_.jpg" rel="external"><img src="images/02/16.jpg" alt="Image 116" /></a></li>
+                <li><a href="images/02/17_.jpg" rel="external"><img src="images/02/17.jpg" alt="Image 117" /></a></li>
+                <li><a href="images/02/18_.jpg" rel="external"><img src="images/02/18.jpg" alt="Image 118" /></a></li>
+                <li><a href="images/02/19_.jpg" rel="external"><img src="images/02/19.jpg" alt="Image 119" /></a></li>
+                <li><a href="images/02/20_.jpg" rel="external"><img src="images/02/20.jpg" alt="Image 120" /></a></li>
+                <li><a href="images/02/21_.jpg" rel="external"><img src="images/02/21.jpg" alt="Image 121" /></a></li>
+                <li><a href="images/02/22_.jpg" rel="external"><img src="images/02/22.jpg" alt="Image 122" /></a></li>
+                <li><a href="images/02/23_.jpg" rel="external"><img src="images/02/23.jpg" alt="Image 123" /></a></li>
+                <li><a href="images/02/24_.jpg" rel="external"><img src="images/02/24.jpg" alt="Image 124" /></a></li>
+                <li><a href="images/02/25_.jpg" rel="external"><img src="images/02/25.jpg" alt="Image 125" /></a></li>
+                <li><a href="images/02/26_.jpg" rel="external"><img src="images/02/26.jpg" alt="Image 126" /></a></li>
+                <li><a href="images/02/27_.jpg" rel="external"><img src="images/02/27.jpg" alt="Image 127" /></a></li>
+                <li><a href="images/02/28_.jpg" rel="external"><img src="images/02/28.jpg" alt="Image 128" /></a></li>
+                <li><a href="images/02/29_.jpg" rel="external"><img src="images/02/29.jpg" alt="Image 119" /></a></li>
+                <li><a href="images/02/30_.jpg" rel="external"><img src="images/02/30.jpg" alt="Image 130" /></a></li>
+                <li><a href="images/02/31_.jpg" rel="external"><img src="images/02/31.jpg" alt="Image 131" /></a></li>
+                <li><a href="images/02/32_.jpg" rel="external"><img src="images/02/32.jpg" alt="Image 132" /></a></li>
+                <li><a href="images/02/33_.jpg" rel="external"><img src="images/02/33.jpg" alt="Image 133" /></a></li>
+                <li><a href="images/02/34_.jpg" rel="external"><img src="images/02/34.jpg" alt="Image 134" /></a></li>
+                <li><a href="images/02/35_.jpg" rel="external"><img src="images/02/35.jpg" alt="Image 135" /></a></li>
+                <li><a href="images/02/46_.jpg" rel="external"><img src="images/02/36.jpg" alt="Image 136" /></a></li>
+               
+            </ul>
+
+        </div>
+	<div data-role="footer">
+		<h4>&copy; 2013 Buy2best.com</h4>
+	</div>
+
+
+    </div>
+    
+    
+<!-- PAGE Gallery3 -->
+    <div data-role="page" data-add-back-btn="true" id="Gallery3" class="gallery-page">
+
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Car Accessories</h1>
+        </div>
+
+        <div data-role="content">
+
+            <ul class="gallery">
+
+                <li><a href="images/03/01_.jpg" rel="external"><img src="images/03/01.jpg" alt="Image 201" /></a></li>
+                <li><a href="images/03/02_.jpg" rel="external"><img src="images/03/02.jpg" alt="Image 202" /></a></li>
+                <li><a href="images/03/03_.jpg" rel="external"><img src="images/03/03.jpg" alt="Image 203" /></a></li>
+                <li><a href="images/03/04_.jpg" rel="external"><img src="images/03/04.jpg" alt="Image 204" /></a></li>
+                <li><a href="images/03/05_.jpg" rel="external"><img src="images/03/05.jpg" alt="Image 205" /></a></li>
+                <li><a href="images/03/06_.jpg" rel="external"><img src="images/03/06.jpg" alt="Image 206" /></a></li>
+                <li><a href="images/03/07_.jpg" rel="external"><img src="images/03/07.jpg" alt="Image 207" /></a></li>
+                <li><a href="images/03/08_.jpg" rel="external"><img src="images/03/08.jpg" alt="Image 208" /></a></li>
+                <li><a href="images/03/09_.jpg" rel="external"><img src="images/03/09.jpg" alt="Image 209" /></a></li>
+                <li><a href="images/03/10_.jpg" rel="external"><img src="images/03/10.jpg" alt="Image 210" /></a></li>
+                <li><a href="images/03/11_.jpg" rel="external"><img src="images/03/11.jpg" alt="Image 211" /></a></li>
+                <li><a href="images/03/12_.jpg" rel="external"><img src="images/03/12.jpg" alt="Image 212" /></a></li>
+                <li><a href="images/03/13_.jpg" rel="external"><img src="images/03/13.jpg" alt="Image 213" /></a></li>
+            </ul>
+
+        </div>
+	<div data-role="footer">
+		<h4>&copy; 2013 Buy2best.com</h4>
+	</div>
+
+
+    </div>
+    
+    
+<!-- PAGE Gallery4 -->
+    <div data-role="page" data-add-back-btn="true" id="Gallery4" class="gallery-page">
+
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Mobile & Laptop Accessories</h1>
+        </div>
+
+        <div data-role="content">
+
+            <ul class="gallery">
+
+                <li><a href="images/04/01_.jpg" rel="external"><img src="images/04/01.jpg" alt="Image 301" /></a></li>
+                <li><a href="images/04/02_.jpg" rel="external"><img src="images/04/02.jpg" alt="Image 302" /></a></li>
+                <li><a href="images/04/03_.jpg" rel="external"><img src="images/04/03.jpg" alt="Image 303" /></a></li>
+                <li><a href="images/04/04_.jpg" rel="external"><img src="images/04/04.jpg" alt="Image 304" /></a></li>
+                <li><a href="images/04/05_.jpg" rel="external"><img src="images/04/05.jpg" alt="Image 305" /></a></li>
+                <li><a href="images/04/06_.jpg" rel="external"><img src="images/04/06.jpg" alt="Image 306" /></a></li>
+                <li><a href="images/04/07_.jpg" rel="external"><img src="images/04/07.jpg" alt="Image 307" /></a></li>
+                <li><a href="images/04/08_.jpg" rel="external"><img src="images/04/08.jpg" alt="Image 308" /></a></li>
+                <li><a href="images/04/09_.jpg" rel="external"><img src="images/04/09.jpg" alt="Image 309" /></a></li>
+                <li><a href="images/04/10_.jpg" rel="external"><img src="images/04/10.jpg" alt="Image 310" /></a></li>
+     		 </ul>
+
+        </div>
+	<div data-role="footer">
+		<h4>&copy; 2013 Buy2best.com</h4>
+	</div>
+
+
+    </div>
+    
+    
+<!-- PAGE Gallery5 -->
+    <div data-role="page" data-add-back-btn="true" id="Gallery5" class="gallery-page">
+
+        <div data-role="header" data-theme="a" data-position="inline" data-id="barra" data-position="fixed">
+            <a href="#Home" data-icon="home" data-direction="reverse" data-theme="a">Back</a>
+            <h1>Stationery</h1>
+        </div>
+
+        <div data-role="content">
+
+            <ul class="gallery">
+
+                <li><a href="images/05/01_.jpg" rel="external"><img src="images/05/01.jpg" alt="Image 401" /></a></li>
+                <li><a href="images/05/02_.jpg" rel="external"><img src="images/05/02.jpg" alt="Image 402" /></a></li>
+                <li><a href="images/05/03_.jpg" rel="external"><img src="images/05/03.jpg" alt="Image 403" /></a></li>
+              </ul>
+
+	<div data-role="footer" data-position="fixed">
+		<h4>&copy; 2013 Buy2best.com</h4>
+	</div>
+
+
 
 </body>
 </html>
